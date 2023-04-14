@@ -1,22 +1,13 @@
 ---
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: route.openshift.io/v1
+kind: Route
 metadata:
-  name: forge-mi-ingress-base-static
+  name: route
 spec:
+  host: demo-1404-arnaud.apps.ocp4-7.infocepo.com
   tls:
-    - hosts:
-        - demo-1404-arnaud.apps.ocp4-7.infocepo.com
-  rules:
-    - host: demo-1404-arnaud.apps.ocp4-7.infocepo.com
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: dso-demo-static
-                port:
-                  number: 8080
-
-
+    termination: edge
+  to:
+    kind: Service
+    name: dso-demo-static
+  wildcardPolicy: None
