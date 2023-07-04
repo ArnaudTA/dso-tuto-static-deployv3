@@ -19,7 +19,7 @@ spec:
         - name: quay-image-pull-secret
       containers:
         - name: dso-demo-static
-          image: harbor.apps.ocp4-7.infocepo.com/mi-aa/app-nginx-static-demo:master
+          image: docker.io/nginxinc/nginx-unprivileged
           imagePullPolicy: Always
           resources:
             limits:

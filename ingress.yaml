@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: acme-issuer
+  name: ingress
+spec:
+  rules:
+  - host: minono.apps.ocp4-7.infocepo.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: dso-demo-static
+            port:
+              number: 8080
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - minono.apps.ocp4-7.infocepo.com
+    secretName: minono-tls-secret
+status:
+  loadBalancer:
+    ingress:
+    - hostname: router-default.apps.ocp4-7.infocepo.com
